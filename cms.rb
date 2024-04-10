@@ -4,6 +4,7 @@ require "sinatra/reloader"
 # require "sinatra/content_for"
 require "tilt/erubis"
 require "redcarpet"
+require "yaml"
 
 configure do
   enable :sessions
@@ -47,11 +48,29 @@ def user_signed_in?
 	# session.key?(:username)
 end
 
+# Redirect user if not signed in
 def require_signed_in_user
 	if !session[:username]
 		session[:message] = "You must be signed in to do that."
 		redirect "/"
 	end
+end
+
+# Return hash of valid users
+def load_user_credentials
+	users_path = ""
+  if ENV["RACK_ENV"] == "test"
+    users_path = File.expand_path("../test/users.yml", __FILE__)
+  else
+    users_path = File.expand_path("../users.yml", __FILE__)
+  end
+	YAML.load_file(users_path)
+end
+
+# Return true if user credentials are valid
+def valid_user?(username, password)
+	users = load_user_credentials
+	users[username] == password
 end
 
 # View list of files 
@@ -138,7 +157,7 @@ end
 post "/users/signin" do
 	username = params[:username]
 	password = params[:password]
-	if username == "admin" && password == "secret"
+	if valid_user?(username, password)
 		session[:username] = username
 		session[:message] = "Welcome!"
 		redirect "/"
