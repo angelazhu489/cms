@@ -231,11 +231,23 @@ class CMSTest < Minitest::Test
 		assert_includes(last_response.body, "Sign Out")
 	end
 
-	def test_invalid_signing_in
+	def test_invalid_signing_in_1
 		post "/users/signin", username: "admin", password: "invalid"
 		assert_equal(422, last_response.status)
 		assert_includes(last_response.body, "Invalid credentials")
 		assert_includes(last_response.body, "admin")
+		assert_includes(last_response.body, '<label for="username">')
+		assert_includes(last_response.body, '<button type="submit">')
+
+		get "/users/signin"
+		refute_includes(last_response.body, "Invalid credentials")
+	end
+
+	def test_invalid_signing_in_2
+		post "/users/signin", username: "invalid", password: "invalid"
+		assert_equal(422, last_response.status)
+		assert_includes(last_response.body, "Invalid credentials")
+		assert_includes(last_response.body, "invalid")
 		assert_includes(last_response.body, '<label for="username">')
 		assert_includes(last_response.body, '<button type="submit">')
 

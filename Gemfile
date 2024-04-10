@@ -12,4 +12,6 @@ gem "minitest"
 gem 'minitest-reporters'
 gem "rack-test"
 
+gem "bcrypt"
+
 ruby "3.2.2"

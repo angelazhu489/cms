@@ -5,6 +5,7 @@ require "sinatra/reloader"
 require "tilt/erubis"
 require "redcarpet"
 require "yaml"
+require "bcrypt"
 
 configure do
   enable :sessions
@@ -70,7 +71,10 @@ end
 # Return true if user credentials are valid
 def valid_user?(username, password)
 	users = load_user_credentials
-	users[username] == password
+	if users[username]
+		return BCrypt::Password.new(users[username]) == password
+	end
+	false
 end
 
 # View list of files 

@@ -1,7 +1,7 @@
 {
-  bill: billspassword,
-  sonia: soniaspassword,
-  angela: angspassword,
-  admin: secret,
-  developer: letmein
+  bill: $2a$12$2AJvwZhFjVSDMml.rzmDluNpRNdkBhYuc6JMxJmbFpIKJnPNMql5W, # billspassword
+  sonia: $2a$12$K8cE6oYFKze6dyloFzHBse/Fk79cvkFvQwmdO0J69VShf5ddNkra6, # soniaspassword
+  angela: $2a$12$YA3EWpeKnqdbIuqUMZZA4OS.8N9u5z9.bncP9qEGjwduieJlM3bsC, # angspassword
+  admin: $2a$12$HnOV82lDoU5Jq7zsv5VAGeeoiAT17MWKNbuG2dHH1GdGUSl9cZ/Ka, # secret
+  developer: $2a$12$PSzRh6zFPrMHcwNR57vp4Oi/1a5yQWZeMvLT.gXNIxV1yGsJvQ/9C # letmein
 }
