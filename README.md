@@ -1,1 +1,1 @@
-Simple Sinatra Sontent Management System
+## Simple Sinatra Content Management System
